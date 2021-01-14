@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'configuration.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -74,6 +76,66 @@ class _HomeScreenState extends State<HomeScreen> {
                ],
              ),
             ),
+            Container(
+              height:120,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                itemBuilder: (context,index){
+                  return Container(
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(left:10),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: shadowList,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          height: 80,
+                          width: 80,
+                          child: Image.asset(categories[index]['iconPath']),
+                        ),
+                        Text(categories[index]['name']),
+                      ],
+                    ),
+                  );
+                },
+              )
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              height: 240,
+              child: Row(
+                children: [
+                  Expanded(child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey[300],
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: shadowList,
+                        ),
+                        margin: const EdgeInsets.only(top: 40),
+                      ),
+                      Align(
+                        child: Image.asset('assets/pet-cat2.png'),
+                      )
+                    ],
+                  ),),
+                  Expanded(child:Container(
+                    margin: const EdgeInsets.only(top: 60,bottom: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: shadowList,
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(20),bottomRight: Radius.circular(20)),
+
+                    ),
+                  ),)
+                ],
+              ),
+            )
           ],
         ),
         color: Colors.grey[200],
