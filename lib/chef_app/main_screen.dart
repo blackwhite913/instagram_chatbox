@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:instagramchatbox/module/food.dart';
+import 'package:instagramchatbox/module/data.dart';
+import 'package:provider/provider.dart';
 import 'food_card.dart';
 
 
 class MainScreen extends StatefulWidget {
-  final List<Food> foodList;
-  MainScreen(this.foodList);
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -90,15 +89,19 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ],
               ),
-              Container(
-                height: 440,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.foodList.length,
-                    itemBuilder: (context,index) {
-                      return  FoodCard(foodItem: widget.foodList[index],);
-                    })
-              ),
+              Consumer<FoodListProvider>(
+                  builder: (context,data,child){
+                return Container(
+                    height: 440,
+                    child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: data.foodList.length,
+                        itemBuilder: (context,index) {
+                          return  FoodCard(foodItem: data.foodList[index],);
+                        })
+                );
+              }),
               Container(
                 height: 200,width: 300,
                 decoration: BoxDecoration(

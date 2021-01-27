@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:instagramchatbox/chef_app/main.dart';
-import 'package:instagramchatbox/chef_app/main_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:instagramchatbox/module/food.dart';
 import 'package:instagramchatbox/module/data.dart';
 
@@ -14,7 +13,7 @@ class ChefDrawer extends StatefulWidget {
 }
 
 class _ChefDrawerState extends State<ChefDrawer> {
-  List<FoodList> foodList =[FoodList(cupcakes,"Cupcakes"),FoodList(cakes,"Cakes")];
+  List<FoodList> innerFoodList =[FoodList(cupcakes,"Cupcakes"),FoodList(cakes,"Cakes"),FoodList(coffee,"Coffees")];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,12 +28,10 @@ class _ChefDrawerState extends State<ChefDrawer> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ...foodList.map((foodName){
+                ...innerFoodList.map((foodName){
                   return GestureDetector(
                     onTap: (){
-                      setState(() {
-                        HomePage(mainScreen: MainScreen(foodName.foodList),);
-                      });
+                     Provider.of<FoodListProvider>(context,listen: false).changer(foodName.foodList);
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical:8),
